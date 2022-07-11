@@ -3,52 +3,52 @@ addToBooksContainer = document.querySelector('.books');
 
 let myLibrary = [];
 
+class Book {
+  constructor(title, author, pages, isRead) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.isRead = (isRead == null) ? false : true;
+  }
+
+  formInnerHTML() {
+    let innerHTMLString = '';
+    innerHTMLString += `    
+      <div class="book-name">${this.title}</div>
+      <div class="book-author">${this.author}</div>
+      <div class="book-pages">${this.pages} pages</div>
+      <div class="book-buttons">
+    `;
+    if (this.isRead == true) {
+      innerHTMLString += `
+        <button class="book-button" id="isReadButton">
+          <img src="./media/images/seen.svg" alt="" class="book-button-img">
+          <img src="./media/images/remove-seen.svg" alt="" class="book-button-img">
+        </button>
+      `;
+    } else {
+      innerHTMLString += `
+        <button class="book-button" id="isReadButton">
+          <img src="./media/images/unseen.svg" alt="" class="book-button-img">
+          <img src="./media/images/seen.svg" alt="" class="book-button-img">
+        </button>
+      `;
+    }
+    innerHTMLString += `          
+      <button class="book-button" id="deleteButton">
+          <img src="./media/images/delete.svg" alt="" class="book-button-img">
+        </button>
+      </div>
+      `;
+
+    return innerHTMLString;
+  }
+}
+
 submitButton.addEventListener('click', () => {
   addBookToLibrary();
-
   displayLibrary();
 });
-
-function Book(title, author, pages, isRead) {
-  // the constructor
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.isRead = (isRead == null) ? false : true;
-}
-
-Book.prototype.formInnerHTML = function () {
-  innerHTMLString = '';
-  innerHTMLString += `    
-    <div class="book-name">${this.title}</div>
-    <div class="book-author">${this.author}</div>
-    <div class="book-pages">${this.pages} pages</div>
-    <div class="book-buttons">
-  `;
-  if (this.isRead == true) {
-    innerHTMLString += `
-      <button class="book-button" id="isReadButton">
-        <img src="./media/images/seen.svg" alt="" class="book-button-img">
-        <img src="./media/images/remove-seen.svg" alt="" class="book-button-img">
-      </button>
-    `;
-  } else {
-    innerHTMLString += `
-      <button class="book-button" id="isReadButton">
-        <img src="./media/images/unseen.svg" alt="" class="book-button-img">
-        <img src="./media/images/seen.svg" alt="" class="book-button-img">
-      </button>
-    `;
-  }
-  innerHTMLString += `          
-    <button class="book-button" id="deleteButton">
-        <img src="./media/images/delete.svg" alt="" class="book-button-img">
-      </button>
-    </div>
-    `;
-
-  return innerHTMLString;
-}
 
 function addBookToLibrary() {
   let usernameForm = document.getElementById("book-info");
@@ -88,3 +88,10 @@ function addListeners(book, bookHTML, index) {
     myLibrary.splice(index, 1);
   });
 }
+
+// IIFE for example book
+(function () {
+  const exampleBook = new Book('Example Book', 'James G.', '123', null)
+  myLibrary.push(exampleBook);
+  displayLibrary();
+})();

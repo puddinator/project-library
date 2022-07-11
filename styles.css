@@ -20,7 +20,7 @@ body {
 }
 
 .library-container {
-    min-width: max(300px, 25vw);
+    min-width: max(200px, 25vw);
     background-image: url("./media/images/background.jpg");
     background-size: cover;
     opacity: 0.7;
@@ -57,7 +57,7 @@ input:focus {
 }
 
 input[type="text"] {
-    width: 300px;
+    min-width: max(200px, 25vw);
     height: 20px;
     padding-left: 5px;
 }
@@ -65,6 +65,11 @@ input[type="text"] {
 input[type="button"] {
     width: 100px;
     height: 30px;
+}
+
+label {
+    color: white;
+    font-weight: bold;
 }
 
 .books {
